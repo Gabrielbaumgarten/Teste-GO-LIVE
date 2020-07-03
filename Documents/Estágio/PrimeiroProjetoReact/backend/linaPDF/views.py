@@ -26,10 +26,11 @@ class JuntarPDF(APIView):
         
 
     def post(self, request, format=None):
-        # nomeDosArquivos = request.data.get('nomesArquivos')
-        arquivo1 = request.data.get('arquivo1') 
-        arquivo2 = request.data.get('arquivo2') 
-        output = merge(arquivo1, arquivo2)
+        arquivos = []
+        for index in range(len(request.data)):
+            aux = 'arquivo' + str(index)
+            arquivos.append(request.data.get(aux)) 
+        output = merge(arquivos)
         
         fs = FileSystemStorage()
         # Buscando o arquivo que foi criado
