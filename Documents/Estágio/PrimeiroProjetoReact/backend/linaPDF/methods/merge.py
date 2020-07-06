@@ -1,3 +1,4 @@
+import os
 from PyPDF2 import PdfFileMerger
 
 def merge(arquivos):
@@ -10,6 +11,7 @@ def merge(arquivos):
     merger.merge(position= index+1, fileobj=arquivos[index+1])
 
     # Write to an output PDF document
+    os.remove("document-output.pdf")
     output = open("document-output.pdf", "wb")
     merger.write(output)
     output.close()
